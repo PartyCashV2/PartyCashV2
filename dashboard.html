@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="PartyCash | PartyCash.io">
+        <meta name="author" content="PartyCash">
+
+        <title>PartyCash</title>
+
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+        <link href="assets/css/universalcoin.css" rel="stylesheet">
+        <link href="assets/css/alertify.min.css" rel="stylesheet">
+        <link href="assets/css/themes/bootstrap.min.css" rel="stylesheet">
+
+        <script src="assets/js/modernizr.min.js"></script>
+        
+        <!-- FontAwesome -->
+        <script src="https://kit.fontawesome.com/f352960784.js" crossorigin="anonymous"></script>
+    </head>
+    
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #000;">
+                <a class="navbar-brand" href="index.html"><img src="assets/img/plogo.png" width="40px" /> PartyCash</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav mr-auto">
+                       <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-user text-white"></i> Dashboard</a></li>
+                    </ul>
+                    
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item"><a class="nav-link" href="https://discord.gg/pupjXVJ" target="_blank"><i class="fab fa-discord text-white"></i> Discord</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://twitter.com/Universal_Coin" target="_blank"><i class="fab fa-twitter text-white"></i> Twitter</a></li>
+                        <li class="nav-item"><a class="nav-link" href="https://github.com/PartyCash" target="_blank"><i class="fab fa-github text-white"></i> GitHub</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        
+        <main id="content" role="main">
+            <div class="jumbotron glassPanel roundedCorners text-white" style="padding-top: 100px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1>Hello, <span class="username">User</span></h1>
+                            <p>You&apos;ve earned <span id="myDividends">-</span> PartyNFT</p>
+                            <button type="button" class="btn btn-md btn-success roundedCorners" id="withdraw">Withdraw to Wallet</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <a href="#" data-toggle="modal" data-target="#detailsModal" onclick="showTokenModal(UVC)">
+                            <div class="card glassPanel roundedCorners">
+                                <div class="card-body">
+                                    <h5 class="text-light"><img src="assets/img/flux.png" width="25" height="26" /> <b><span class="uvcBalance">0</span></b></h5>
+                                    <small>PartyCash</small>
+                                </div>
+                            </div>
+                        </a>
+                        <br />
+                    </div> 
+                    
+                    <div class="col text-center">
+                        <a href="#" data-toggle="modal" data-target="#detailsModal" onclick="showTokenModal(UVCX)">
+                            <div class="card glassPanel roundedCorners">
+                                <div class="card-body">
+                                    <h5 class="text-light"><img src="assets/img/uvcx.png" width="25px" height="25px" /> <b><span class="uvcxBalance">0</span></b></h5>
+                                    <small>PartyNFT</small>
+                                </div>
+                            </div>
+                        </a>
+                        <br />
+                    </div>
+                    
+                    <div class="col text-center">
+                        <a href="#" data-toggle="modal" data-target="#detailsModal" onclick="showTokenModal(STRN)">
+                            <div class="card glassPanel roundedCorners">
+                                <div class="card-body">
+                                    <h5 class="text-light"><img src="assets/img/saturn.png" width="25px" height="25px" /> <b><span class="strnBalance">0</span></b></h5>
+                                    <small>Party DAO</small>
+                                </div>
+                            </div>
+                        </a>
+                        <br />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="card text-white glassPanel silverBorder roundedCorners">
+                            <div class="card-header">Stats &amp; Info</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4 text-center">
+                                        <h3><span id="myFrozen">-</span></h3>
+                                        <small>Your Staked PartyNFT</small><br /><br />
+                                    </div>
+                                    
+                                    <div class="col-md-4 text-center">
+                                        <h3><span id="totalFrozen">-</span></h3>
+                                        <small>Total Staked PartyNFT</small><br /><br />
+                                    </div>
+                                    
+                                    <div class="col-md-4 text-center">
+                                        <h3><span id="totalSupply">-</span></h3>
+                                        <small>Remaining Supply</small><br /><br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <!-- Stake SUVC -->
+                    <div class="col-md-3">
+                        <div class="card text-white glassPanel greenBorder roundedCorners">
+                            <div class="card-header">Stake PartyNFT</div>
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <label>PartyNFT to Stake: </label>
+                                            <input type="number" class="form-control" placeholder="100" id="freezeAmount" /><br />
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <p>100 Tokens Minimum</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <button class="btn btn-block btn-md btn-success roundedCorners" id="freeze">Stake</button>
+                                        </div>
+                                        
+                                        <div class="col text-center">
+                                            <button class="btn btn-block btn-md btn-success roundedCorners" id="freezemax">Max</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    
+                    <!-- Unstake SUVC -->
+                    <div class="col-md-3">
+                        <div class="card text-white glassPanel redBorder roundedCorners">
+                            <div class="card-header">Unstake PartyNFT</div>
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-left">
+                                            <label>PartyNFT to Unstake: </label>
+                                            <input type="number" class="form-control" placeholder="100" id="unfreezeAmount" /><br />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <p>1% Unstake Tax</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <button class="btn btn-block btn-md btn-danger roundedCorners" id="unfreeze">Unstake</button>
+                                        </div>
+                                        
+                                        <div class="col text-center">
+                                            <button class="btn btn-block btn-md btn-danger roundedCorners" id="unfreezemax">Max</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                    
+                    <!-- Transfer SUVC -->
+                    <div class="col-md-6">
+                        <div class="card text-white glassPanel orangeBorder roundedCorners">
+                            <div class="card-header">Transfer PartyNFT</div>
+                            <div class="card-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-4 text-left">
+                                            <label>PartyNFT to Transfer: </label>
+                                            <input type="number" class="form-control" placeholder="100" id="transferAmount" /><br />
+                                        </div>
+                                        
+                                        <div class="col-md-8 text-left">
+                                            <label>Recipient Address: </label>
+                                            <input type="text" class="form-control" placeholder="0x..." id="transferReceiver" /><br />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <p>1&#37; Transfer Tax</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col text-center">
+                                            <button class="btn btn-block btn-md btn-warning roundedCorners" id="transfer">Transfer</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+                <br />
+            </div>
+            
+            <!-- Bottom Nav -->
+            <nav class="navbar fixed-bottom navbar-expand-sm navbar-dark" style="background-color: rgba(0,0,0,1);">
+                <ul class="navbar-nav mr-auto ml-auto">
+                    <script src="https://widgets.coingecko.com/coingecko-coin-price-marquee-widget.js"></script>
+                    <coingecko-coin-price-marquee-widget  coin-ids="bitcoin,ethereum,ethereum-classic" currency="usd" background-color="#000000" locale="en" font-color="#ffffff"></coingecko-coin-price-marquee-widget>
+                </ul>
+            </nav>
+        </main>
+        
+        <footer>
+            <div class="container">
+                <div class="row jumbotron glassPanel roundedCorners text-white">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <b>PartyCash Dapp</b><br />
+                                <p>
+                                    This project and its code are Open Source, released under the MIT License. <a class="text-success" href="https://opensource.org/licenses/MIT" target="_blank">Click Here</a> to learn more.
+                                </p>
+                            </div>
+                        
+                            <div class="col-md-3">
+                                <b class="text-muted">SOCIAL</b><br />
+                                <a class="text-white" href="https://twitter.com/Universal_Coin" target="_blank">Twitter</a><br />
+                                <a class="text-white" href="https://discord.gg/" target="_blank">Discord</a><br />
+                            </div>
+                        
+                            <div class="col-md-3">
+                                <b class="text-muted">RESOURCES</b><br />
+                                <a class="text-white" href="https://github.com/PartyCash">GitHub</a><br />
+                                <a class="text-white" href="https://blockscout.com/etc/mainnet/address/0xd6dF0C579f2A65049a893fDaEC9fCE098CC19F87/contracts" target="_blank">Smart Contract</a><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+        <!-- MODALS -->
+        <div class="modal glassPanel" id="detailsModal">
+            <div class="modal-dialog">
+                <div class="modal-content glassPanel roundedCorners">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header glassPanel rcTop text-white">
+                        <h4 class="modal-title">Balance Details</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body glassPanel text-white">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <h3><img id="tokenIcon" src="assets/img/plogo.png" width="25px" height="25px" /> <span id="tokenBalance">0</span> <span id="tokenSymbol">XXX</span></h3>
+                                    <small>Your Balance</small>
+                                </div>
+                            </div>
+                            
+                            <hr />
+                            
+                            <div class="row">
+                                <div class="col text-center">
+                                    <a class="btn btn-block btn-md btn-success roundedCorners" href="#" target="_blank" id="tokenTradeLink">Trade on Saturn DEX</a>
+                                </div>
+                                
+                                <div class="col text-center">
+                                    <a class="btn btn-block btn-md btn-warning roundedCorners" href="#" target="_blank" id="tokenContractLink">View Contract</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer glassPanel rcBottom text-white">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-center"><button type="button" class="btn btn-block btn-danger roundedCorners" data-dismiss="modal">Close</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        
+        <!-- Bootstrap core JavaScript -->
+        <script src="https://unpkg.com/@metamask/legacy-web3@latest/dist/metamask.web3.js"></script>
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/popper.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/tether.min.js"></script>
+        <script src="assets/js/alertify.min.js"></script>
+        <script src="assets/js/moment.min.js"></script>
+        <script src="assets/js/clipboard.min.js"></script>
+        <script src="assets/js/web3.min.js"></script>
+
+        <script src="assets/lib/tokens.js"></script>
+        <script src="assets/lib/metamask-adapter.js"></script>
+    </body>
+</html>
